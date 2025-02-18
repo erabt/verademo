@@ -23,7 +23,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
           name: verademo.war
-          path: target/verademo.war
+          path: app/target/verademo.war
 
   veracode-sca:
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
       - name: veracode sca scan
         env: 
           SRCCLR_API_TOKEN: ${{ secrets.SRCCLR_API_TOKEN }}
-        run: curl -sSL https://download.sourceclear.com/ci.sh | sh -s scan --update-advisor --uri-as-name --ref ${{ github.ref_name }}
+        run: curl -sSL https://download.sourceclear.com/ci.sh | sh -s scan app --update-advisor --uri-as-name --ref ${{ github.ref_name }}
 
   veracode-container-iac-secrets-scan:
     runs-on: ubuntu-latest
